@@ -13,6 +13,8 @@ public interface OrderLineMapper {
 
     OrderLine selectByPrimaryKey(Integer id);
 
+    OrderLine selectByOrderId(Integer id);
+
     int updateByPrimaryKeySelective(OrderLine record);
 
     int updateByPrimaryKey(OrderLine record);

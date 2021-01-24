@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xishan.store.trade.server.mapper.UserAmountMapper">
+  <resultMap id="BaseResultMap" type="com.xishan.store.trade.api.model.UserAmount">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, amount, update_at, create_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_amount
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_amount
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xishan.store.trade.api.model.UserAmount">
+    insert into user_amount (id, user_id, amount, 
+      update_at, create_at)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{amount,jdbcType=BIGINT}, 
+      #{updateAt,jdbcType=TIMESTAMP}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xishan.store.trade.api.model.UserAmount">
+    insert into user_amount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xishan.store.trade.api.model.UserAmount">
+    update user_amount
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xishan.store.trade.api.model.UserAmount">
+    update user_amount
+    set user_id = #{userId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

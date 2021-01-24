@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xishan.store.trade.server.mapper.OrderLineMapper">
+  <resultMap id="BaseResultMap" type="com.xishan.store.trade.api.model.OrderLine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, user_id, sku_id, goods_id, user_name,good_name,sku_name,create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByOrderId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `order_line`
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xishan.store.trade.api.model.OrderLine" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into order_line (id, order_id, user_id, 
+      sku_id, goods_id, user_name,good_name,sku_name, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{skuId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{goodName,jdbcType=VARCHAR},#{skuName,jdbcType=VARCHAR}, now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xishan.store.trade.api.model.OrderLine">
+    insert into order_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xishan.store.trade.api.model.OrderLine">
+    update order_line
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xishan.store.trade.api.model.OrderLine">
+    update order_line
+    set order_id = #{orderId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

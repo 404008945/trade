@@ -10,9 +10,9 @@ public class Order {
 
     private Byte type;
 
-    private Integer customerId;
+    private Long customerId;
 
-    private BigDecimal amount;
+    private Long amount;
 
     private Byte paymentType;
 
@@ -44,19 +44,19 @@ public class Order {
         this.type = type;
     }
 
-    public Integer getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
-    public BigDecimal getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 

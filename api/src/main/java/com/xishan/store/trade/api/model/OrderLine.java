@@ -5,13 +5,19 @@ import java.util.Date;
 public class OrderLine {
     private Integer id;
 
-    private Long orderId;
+    private Integer orderId;
 
     private Long userId;
 
     private Integer skuId;
 
     private Integer goodsId;
+
+    private String userName;
+
+    private String goodName;
+
+    private String skuName;
 
     private Date createTime;
 
@@ -23,11 +29,11 @@ public class OrderLine {
         this.id = id;
     }
 
-    public Long getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
@@ -61,5 +67,29 @@ public class OrderLine {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
+
+    public String getSkuName() {
+        return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
     }
 }
