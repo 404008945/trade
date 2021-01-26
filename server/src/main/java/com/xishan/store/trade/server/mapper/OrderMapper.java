@@ -2,6 +2,7 @@ package com.xishan.store.trade.server.mapper;
 
 
 import com.xishan.store.trade.api.model.Order;
+import com.xishan.store.trade.api.request.ListOrderRequest;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,9 +17,12 @@ public interface OrderMapper {
 
     Order selectByPrimaryKey(Integer id);
 
+    List<Order> selectByOrderRequest(ListOrderRequest listOrderRequest);
+
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    int batchUpdate(List<Order> record);
 
     List<Integer> pagingIds();
 }

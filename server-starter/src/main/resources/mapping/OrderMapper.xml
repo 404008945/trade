@@ -10,17 +10,49 @@
     <result column="payment_type" jdbcType="TINYINT" property="paymentType" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, code, `type`, customer_id, amount, payment_type, status, create_time
+    id, code, `type`, customer_id, amount, payment_type, status, create_time,version
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    id
+    select
+   <include refid="Base_Column_List"/>
     from `order`
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+
+  <select id="selectByOrderRequest" parameterType="com.xishan.store.trade.api.request.ListOrderRequest" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `order`
+    where    1=1
+    <if test="code != null">
+    and  code = #{code,jdbcType=VARCHAR}
+   </if>
+    <if test="type != null">
+      and type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="customerId != null">
+      and  customer_id = #{customerId,jdbcType=INTEGER}
+    </if>
+    <if test="amount != null">
+      and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="paymentType != null">
+      and  payment_type   #{paymentType,jdbcType=TINYINT}
+    </if>
+    <if test="status != null">
+      and  status = #{status,jdbcType=TINYINT}
+    </if>
+    <if test="startTime != null">
+      and  create_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null">
+      and  create_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
 
   <select id="pagingIds"  resultType="java.lang.Integer">
     select
@@ -34,10 +66,10 @@
   <insert id="insert" parameterType="com.xishan.store.trade.api.model.Order" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into `order` (id, code, `type`,
       customer_id, amount, payment_type, 
-      status, create_time)
+      status, create_time,version)
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{customerId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{paymentType,jdbcType=TINYINT}, 
-      #{status,jdbcType=TINYINT},now())
+      #{status,jdbcType=TINYINT},now(), #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xishan.store.trade.api.model.Order">
     insert into `order`
@@ -117,10 +149,44 @@
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
+      </if>,
+      version = version + 1
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and  version = #{version,jdbcType=INTEGER}
   </update>
+
+
+  <update id="batchUpdate" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+    update `order`
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentType != null">
+        payment_type = #{paymentType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      version = version + 1
+    </set>
+    where id = #{id,jdbcType=INTEGER} and  version = #{version,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
   <update id="updateByPrimaryKey" parameterType="com.xishan.store.trade.api.model.Order">
     update `order`
     set code = #{code,jdbcType=VARCHAR},
@@ -129,7 +195,8 @@
       amount = #{amount,jdbcType=DECIMAL},
       payment_type = #{paymentType,jdbcType=TINYINT},
       status = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      version = version + 1
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

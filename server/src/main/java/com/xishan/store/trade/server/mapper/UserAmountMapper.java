@@ -14,6 +14,8 @@ public interface UserAmountMapper {
 
     UserAmount selectByPrimaryKey(Integer id);
 
+    UserAmount selectByUserId(Long id);
+
     int updateByPrimaryKeySelective(UserAmount record);
 
     int updateByPrimaryKey(UserAmount record);

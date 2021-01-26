@@ -5,7 +5,7 @@ import java.util.Date;
 public class AmountRecord {
     private Integer id;
 
-    private Integer userId;
+    private Long userId;
 
     private Byte type;
 
@@ -23,11 +23,11 @@ public class AmountRecord {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
