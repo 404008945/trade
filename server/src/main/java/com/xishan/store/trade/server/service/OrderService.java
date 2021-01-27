@@ -74,7 +74,7 @@ public class OrderService {
             throw new ServiceException("OrderService.createOrder.入参错误");
         }
         BuySkuRequest buySkuRequest = new BuySkuRequest();
-        String code = UUID.randomUUID().toString();
+        String code = createOrderRequest.getCode();
         buySkuRequest.setUuid(code);
         buySkuRequest.setSkuId(createOrderRequest.getSkuId());
         buySkuRequest.setNum(createOrderRequest.getNum());
@@ -84,6 +84,13 @@ public class OrderService {
             throw new ServiceException("下单失败" + response.getMessage());
         }
         //创建订单
+        //利用这个code做好幂等
+        ListOrderRequest listOrderRequest = new ListOrderRequest();
+        listOrderRequest.setCode(code);
+        List<Order> orders = orderMapper.selectByOrderRequest(listOrderRequest);
+        if(CollectionUtils.isEmpty(orders)){
+            throw  new ServiceException("不可重复下单");
+        }
         Order order = new Order();
         order.setAmount(response.getData().getAmount());
         order.setCode(code);

@@ -17,5 +17,7 @@ public class CreateOrderRequest implements Serializable {
 
     private Byte type;
 
+    private String code;
+
 
 }
