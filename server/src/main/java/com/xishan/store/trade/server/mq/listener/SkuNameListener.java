@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("skuName")
+@Component("skuTag")
 @Slf4j
 public class SkuNameListener  implements  TopicListener{
 
