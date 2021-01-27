@@ -5,8 +5,10 @@ import com.xishan.store.trade.api.facade.PayFacade;
 import com.xishan.store.trade.api.request.PayRequest;
 import com.xishan.store.trade.api.response.PayResponse;
 import com.xishan.store.trade.server.service.PayService;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Service
 public class PayFacadeImpl implements PayFacade {
 
     @Autowired

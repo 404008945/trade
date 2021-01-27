@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: trade-web
+dubbo:
+  application:
+    name:  dubbo-consumer
+  registry:
+    address: zookeeper://47.93.9.181:2181
+    # 读者请换成自己的zookeeperip
+    protocol: zookeeper
+    check: false
+  monitor:
+    protocol: register
+  consumer:
+    check:  false
+    timeout: 3000
+
+server:
+  port: 8064
+
+
+

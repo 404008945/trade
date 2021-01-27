@@ -2,13 +2,14 @@ package com.xishan.store.trade.api.response;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * order信息聚合
  */
 @Data
-public class OrderComplexDTO {
+public class OrderComplexDTO implements Serializable {
 
     private Integer id;
 

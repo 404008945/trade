@@ -16,6 +16,9 @@
         <module>api</module>
         <module>server</module>
         <module>server-starter</module>
+        <module>web</module>
+        <module>web-autoconfigure</module>
+        <module>web-starter</module>
     </modules>
     <name>trade</name>
     <description>Demo project for Spring Boot</description>

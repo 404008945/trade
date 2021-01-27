@@ -39,7 +39,7 @@ dubbo:
   registry:
     address: zookeeper://47.93.9.181:2181
   scan:
-    base-packages:  com.xishan.store.item.api.facade
+    base-packages:  com.xishan.store.trade.api.facade
   consumer:
     check: false
 logging:
