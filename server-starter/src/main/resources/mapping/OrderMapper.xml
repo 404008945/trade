@@ -160,30 +160,30 @@
     <foreach collection="list" item="item" index="index" open="" close="" separator=";">
     update `order`
     <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
+      <if test="item.code != null">
+        code = #{item.code,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=TINYINT},
+      <if test="item.type != null">
+        `type` = #{item.type,jdbcType=TINYINT},
       </if>
-      <if test="customerId != null">
-        customer_id = #{customerId,jdbcType=INTEGER},
+      <if test="item.customerId != null">
+        customer_id = #{item.customerId,jdbcType=INTEGER},
       </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=DECIMAL},
+      <if test="item.amount != null">
+        amount = #{item.amount,jdbcType=DECIMAL},
       </if>
-      <if test="paymentType != null">
-        payment_type = #{paymentType,jdbcType=TINYINT},
+      <if test="item.paymentType != null">
+        payment_type = #{item.paymentType,jdbcType=TINYINT},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+      <if test="item.status != null">
+        status = #{item.status,jdbcType=TINYINT},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="item.createTime != null">
+        create_time = #{item.createTime,jdbcType=TIMESTAMP},
       </if>
       version = version + 1
     </set>
-    where id = #{id,jdbcType=INTEGER} and  version = #{version,jdbcType=INTEGER}
+    where id = #{item.id,jdbcType=INTEGER} and  version = #{item.version,jdbcType=INTEGER}
     </foreach>
   </update>
 
