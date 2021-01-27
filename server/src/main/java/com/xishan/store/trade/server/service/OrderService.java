@@ -102,7 +102,7 @@ public class OrderService {
             throw new ServiceException("查找商品失败"+res.getMessage());
         }
         FindGoodSkuRequest findGoodSkuRequest = new FindGoodSkuRequest();
-        findGoodSkuRequest.setId(createOrderRequest.getGoodsId());
+        findGoodSkuRequest.setId(createOrderRequest.getSkuId());
         Response<FindGoodsSkuResponse> goodsSkuDTORes = goodSkuReadFacade.findById(findGoodSkuRequest);
         if(!goodsSkuDTORes.isSuccess()){
             throw new ServiceException("查找sku失败"+goodsSkuDTORes.getMessage());
@@ -166,8 +166,8 @@ public class OrderService {
         orderComplexDTO.setSkuName(orderComplexDTO.getSkuName());
         return orderComplexDTO;
     }
-
     public Integer update(UpdateOrderRequest updateOrderRequest){
+
         Order order = orderMapper.selectByPrimaryKey(updateOrderRequest.getId());
         if (order == null) {
             throw new ServiceException("查询不到订单：" + updateOrderRequest.getId());

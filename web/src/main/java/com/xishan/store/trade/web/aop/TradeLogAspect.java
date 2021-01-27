@@ -25,10 +25,10 @@ public class TradeLogAspect {
     //申明一个切点 里面是 execution表达式
 
     @Pointcut("execution(public * com.xishan.store.trade.web.controller.*.*(..))")
-    private void controllerAspect() {
+    private void tradeControllerAspect() {
     }
 
-      @Around("controllerAspect()")
+      @Around("tradeControllerAspect()")
     public Object webLogAround(ProceedingJoinPoint point) throws Throwable {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

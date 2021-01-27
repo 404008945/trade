@@ -39,4 +39,6 @@ public class OrderComplexDTO implements Serializable {
 
     private Date createTime;
 
+    private Integer version;
+
 }

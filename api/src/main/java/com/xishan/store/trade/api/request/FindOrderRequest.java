@@ -2,9 +2,10 @@ package com.xishan.store.trade.api.request;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 @Data
-public class FindOrderRequest {
+public class FindOrderRequest implements Serializable {
     private Integer id;
 
     private String code;

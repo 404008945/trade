@@ -34,7 +34,7 @@ mybatis:
 dubbo:
   protocol:
     name: dubbo
-    port: 20881
+    port: 20882
     #指定zookeeper注册中心地址和端口号
   registry:
     address: zookeeper://47.93.9.181:2181

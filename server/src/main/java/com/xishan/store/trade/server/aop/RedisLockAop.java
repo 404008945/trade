@@ -82,7 +82,7 @@ public class RedisLockAop {//在事务之后释放锁
                 Field field = obg.getClass().getDeclaredField(keys[1]);
                 field.setAccessible(true);
                 redisKey =  field.get(obg);
-                if(! (redisValue instanceof Integer )){
+                if(! (redisKey instanceof Integer )){
                     log.error("key必须为整数");
                 }
             }

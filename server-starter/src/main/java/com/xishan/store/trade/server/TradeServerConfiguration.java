@@ -3,10 +3,12 @@ package com.xishan.store.trade.server;
 import com.github.pagehelper.PageHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 public class TradeServerConfiguration {
 
     @Bean

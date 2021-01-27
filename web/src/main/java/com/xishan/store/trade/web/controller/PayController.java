@@ -28,7 +28,7 @@ public class PayController {
     @ResponseBody
     @ResponseJsonFormat
     @Authority
-    PayResponse pay(PayRequest payRequest) {
+    public PayResponse pay(PayRequest payRequest) {
         payRequest.setBizCode(UUID.randomUUID().toString());
         Response<PayResponse> response = payFacade.pay(payRequest);
         if (!response.isSuccess()) {

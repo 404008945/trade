@@ -36,7 +36,7 @@ public class OrderController {
     @ResponseBody
     @ResponseJsonFormat
     @Authority
-    OrderComplexDTO findById(FindOrderRequest findOrderRequest){
+    public OrderComplexDTO findById(FindOrderRequest findOrderRequest){
         Response<OrderComplexDTO> response = orderReadFacade.findById(findOrderRequest);
         if(!response.isSuccess()){
             throw new RestException("查询失败"+response.getMessage());
@@ -49,7 +49,7 @@ public class OrderController {
     @ResponseBody
     @ResponseJsonFormat
     @Authority
-    Paging<OrderComplexDTO> paging(PagingOrderRequest pagingOrderRequest){
+    public Paging<OrderComplexDTO> paging(PagingOrderRequest pagingOrderRequest){
         Response<Paging<OrderComplexDTO>> response = orderReadFacade.paging(pagingOrderRequest);
         if(!response.isSuccess()){
             throw new RestException("分页失败"+response.getMessage());
@@ -61,7 +61,7 @@ public class OrderController {
     @ResponseBody
     @ResponseJsonFormat
     @Authority
-    CreateOrderResponse createOrder(CreateOrderRequest createOrderRequest){
+    public  CreateOrderResponse createOrder(CreateOrderRequest createOrderRequest){
         Response<CreateOrderResponse> response = orderWriteFacade.createOrder(createOrderRequest);
         if(!response.isSuccess()){
             throw new RestException("创建订单失败"+response.getMessage());

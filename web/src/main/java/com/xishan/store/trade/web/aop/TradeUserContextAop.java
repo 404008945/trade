@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 public class TradeUserContextAop {
 
     @Pointcut("execution(public * com.xishan.store.trade.web.controller.*.*(..))")
-    private void userContextAspect() {
+    private void tradeContextAspect() {
     }
 
-    @Around("userContextAspect()")
+    @Around("tradeContextAspect()")
     public Object webContextAround(ProceedingJoinPoint point) throws Throwable {
         //执行前，塞进UserContext中，执行后清除UserContext
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

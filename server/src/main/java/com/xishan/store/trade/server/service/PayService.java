@@ -45,7 +45,7 @@ public class PayService {
             throw new ServiceException("订单状态非法:" +payRequest.getOrderId());
         }
         AmountRecord amountRecord = amountRecordMapper.selectByCode(payRequest.getBizCode());
-        if(amountRecord == null){
+        if(amountRecord != null){
             throw new ServiceException("不可重复付款");
         }
         Long userId = UserContext.getCurrentUser().getId();
@@ -64,6 +64,8 @@ public class PayService {
         UpdateOrderRequest updateOrderRequest = new UpdateOrderRequest();
         updateOrderRequest.setId(payRequest.getOrderId());
         updateOrderRequest.setAmount(order.getAmount());
+        updateOrderRequest.setVersion(order.getVersion());
+
         orderService.update(updateOrderRequest);
         amountRecordMapper.insert(record);
         userAmountMapper.updateByPrimaryKeySelective(userAmount);
