@@ -9,4 +9,6 @@ public class CreateOrderResponse implements Serializable {
 
     private String orderCode;
 
+    private Integer orderId;
+
 }

@@ -105,6 +105,10 @@
             <groupId>com.xishan.store.usercenter</groupId>
             <artifactId>user-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.xishan.store.activity</groupId>
+            <artifactId>api</artifactId>
+        </dependency>
     </dependencies>
 
 

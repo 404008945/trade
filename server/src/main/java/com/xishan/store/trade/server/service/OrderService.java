@@ -88,7 +88,7 @@ public class OrderService {
         ListOrderRequest listOrderRequest = new ListOrderRequest();
         listOrderRequest.setCode(code);
         List<Order> orders = orderMapper.selectByOrderRequest(listOrderRequest);
-        if(CollectionUtils.isEmpty(orders)){
+        if(!CollectionUtils.isEmpty(orders)){
             throw  new ServiceException("不可重复下单");
         }
         Order order = new Order();
@@ -97,7 +97,7 @@ public class OrderService {
         order.setPaymentType(createOrderRequest.getPayType());
         order.setStatus(OrderStatusEnum.WAIT_PAY.getValue());
         order.setType(createOrderRequest.getType());
-        order.setCustomerId(UserContext.getCurrentUser().getId());
+        order.setCustomerId(createOrderRequest.getUserId());
         int n = orderMapper.insert(order);
         if (n <= 0) {
             throw new ServiceException("操作失败");
@@ -118,15 +118,15 @@ public class OrderService {
         orderLine.setGoodsId(createOrderRequest.getGoodsId());
         orderLine.setOrderId(order.getId());
         orderLine.setSkuId(createOrderRequest.getSkuId());
-        orderLine.setUserId(UserContext.getCurrentUser().getId());
+        orderLine.setUserId(createOrderRequest.getUserId());
         orderLine.setOrderId(order.getId());
-        orderLine.setUserName(UserContext.getCurrentUser().getUserName());
+        orderLine.setUserName(createOrderRequest.getUserName());
         orderLine.setGoodName(res.getData().getGoodsName());
         orderLine.setSkuName(goodsSkuDTORes.getData().getTitle());
         orderLineMapper.insert(orderLine);
         CreateOrderResponse createOrderResponse = new CreateOrderResponse();
         createOrderResponse.setOrderCode(code);
-
+        createOrderResponse.setOrderId(order.getId());
         OrderComplexDTO orderComplexDTO = toComplex(order,orderLine);
         orderEsClient.index(orderComplexDTO);//新增的，加进去
         return createOrderResponse;
