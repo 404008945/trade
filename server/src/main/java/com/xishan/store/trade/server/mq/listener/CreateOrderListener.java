@@ -41,6 +41,10 @@ public class CreateOrderListener  implements TopicListener{
             recepitWriteFacade.update(recepitUpdateRequest);
             //更新单据
         }else {
+            RecepitUpdateRequest recepitUpdateRequest = new RecepitUpdateRequest();
+            recepitUpdateRequest.setId(createOrderMessage.getRecepitId());
+            recepitUpdateRequest.setStatus(RecepitStatusEnum.INVALID.getValue());
+            recepitWriteFacade.update(recepitUpdateRequest);
             throw new ServiceException("创建订单失败"+response.getMessage());
         }
     }
